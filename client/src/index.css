@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-gray-900/10 backdrop-blur-md border border-gray-700/20;
+  }
+  
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary-600 to-secondary-600;
+  }
+  
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-600 to-primary-600;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  
+  .shadow-glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Loading animations */
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.loading-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800;
+}
+
+/* Button hover effects */
+.btn-hover {
+  @apply transform transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
+}
+
+/* Image overlay effects */
+.image-overlay {
+  @apply relative overflow-hidden;
+}
+
+.image-overlay::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.image-overlay:hover::before {
+  @apply opacity-100;
+}
