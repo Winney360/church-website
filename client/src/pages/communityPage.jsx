@@ -1,4 +1,4 @@
-import NavigationHeader from "@/components/navigation-header";
+import NavigationHeader from "@/components/navigationHeader";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import NavigationHeader from "@/components/navigation-header";
+import NavigationHeader from "@/components/navigationHeader";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
