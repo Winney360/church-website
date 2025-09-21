@@ -4,18 +4,18 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "./hooks/use-auth";
-import { ThemeProvider } from "./lib/theme-provider";
-import { ProtectedRoute } from "./lib/protected-route";
+import { ThemeProvider } from "./lib/themeProvider";
+import { ProtectedRoute } from "./lib/protectedRoute";
 
-import HomePage from "@/pages/home-page";
-import AuthPage from "@/pages/auth-page";
-import AdminDashboard from "@/pages/admin-dashboard";
-import EventsPage from "@/pages/events-page";
-import SermonsPage from "@/pages/sermons-page";
-import CommunityPage from "@/pages/community-page";
-import GalleryPage from "@/pages/gallery-page";
-import ContactPage from "@/pages/contact-page";
-import NotFound from "@/pages/not-found";
+import HomePage from "@/pages/homePage";
+import AuthPage from "@/pages/authPage";
+import AdminDashboard from "@/pages/adminDashboard";
+import EventsPage from "@/pages/eventsPage";
+import SermonsPage from "@/pages/sermonsPage";
+import CommunityPage from "@/pages/communityPage";
+import GalleryPage from "@/pages/galleryPage";
+import ContactPage from "@/pages/contactPage";
+import NotFound from "@/pages/notFound";
 
 function Router() {
   return (

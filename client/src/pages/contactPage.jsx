@@ -278,54 +278,54 @@ export default function ContactPage() {
                     <SelectContent>
                       <SelectItem value="general">General Inquiry</SelectItem>
                       <SelectItem value="prayer">Prayer Request</SelectItem>
-                      <SelectItem value="volunteerimport { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "./hooks/use-auth";
-import { ThemeProvider } from "./lib/theme-provider";
-import { ProtectedRoute } from "./lib/protected-route";
+                      <SelectItem value="volunteer">Volunteer</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {form.formState.errors.subject && (
+                    <p className="text-sm text-destructive mt-1">
+                      {form.formState.errors.subject.message}
+                    </p>
+                  )}
+                </div>
 
-import HomePage from "@/pages/home-page";
-import AuthPage from "@/pages/auth-page";
-import AdminDashboard from "@/pages/admin-dashboard";
-import EventsPage from "@/pages/events-page";
-import SermonsPage from "@/pages/sermons-page";
-import CommunityPage from "@/pages/community-page";
-import GalleryPage from "@/pages/gallery-page";
-import ContactPage from "@/pages/contact-page";
-import NotFound from "@/pages/not-found";
+                <div>
+                  <Label htmlFor="message">Message *</Label>
+                  <Textarea
+                    id="message"
+                    data-testid="input-message"
+                    {...form.register("message")}
+                    className="mt-1"
+                  />
+                  {form.formState.errors.message && (
+                    <p className="text-sm text-destructive mt-1">
+                      {form.formState.errors.message.message}
+                    </p>
+                  )}
+                </div>
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={HomePage} />
-      <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/admin" component={AdminDashboard} requiredRole="admin" />
-      <ProtectedRoute path="/events" component={EventsPage} />
-      <ProtectedRoute path="/sermons" component={SermonsPage} />
-      <ProtectedRoute path="/community" component={CommunityPage} />
-      <ProtectedRoute path="/gallery" component={GalleryPage} />
-      <ProtectedRoute path="/contact" component={ContactPage} />
-      <Route component={NotFound} />
-    </Switch>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="newsletter"
+                    checked={newsletterSubscribed}
+                    onCheckedChange={(checked) =>
+                      setNewsletterSubscribed(!!checked)
+                    }
+                  />
+                  <Label htmlFor="newsletter">
+                    Subscribe to our newsletter
+                  </Label>
+                </div>
+
+                <Button type="submit" className="w-full">
+                  <Send className="h-4 w-4 mr-2" /> Send Message
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
   );
 }
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
-}
-
-export default App;
