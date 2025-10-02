@@ -1,9 +1,5 @@
 import { createContext, useContext } from "react";
-import {
-  useQuery,
-  useMutation,
-} from "@tanstack/react-query";
-import { insertUserSchema } from "@shared/schema";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { getQueryFn, apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/useToast";
 
@@ -11,6 +7,8 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const { toast } = useToast();
+
+  // ✅ Fetch logged-in user
   const {
     data: user,
     error,
@@ -20,9 +18,10 @@ export function AuthProvider({ children }) {
     queryFn: getQueryFn({ on401: "returnNull" }),
   });
 
+  // ✅ Login (admins + coordinators only)
   const loginMutation = useMutation({
     mutationFn: async (credentials) => {
-      const res = await apiRequest("POST", "/api/login", credentials);
+      const res = await apiRequest("POST", "/api/auth/login", credentials);
       return await res.json();
     },
     onSuccess: (user) => {
@@ -41,27 +40,28 @@ export function AuthProvider({ children }) {
     },
   });
 
-  const registerMutation = useMutation({
-    mutationFn: async (credentials) => {
-      const res = await apiRequest("POST", "/api/register", credentials);
+  // ✅ Create coordinator (admin only)
+  const createCoordinatorMutation = useMutation({
+    mutationFn: async (newCoordinator) => {
+      const res = await apiRequest("POST", "/api/auth/coordinators", newCoordinator);
       return await res.json();
     },
-    onSuccess: (user) => {
-      queryClient.setQueryData(["/api/user"], user);
+    onSuccess: () => {
       toast({
-        title: "Registration successful!",
-        description: "Welcome to Grace Community Church. Your account is pending approval.",
+        title: "Coordinator created!",
+        description: "The new coordinator can now log in.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Registration failed",
+        title: "Failed to create coordinator",
         description: error.message,
         variant: "destructive",
       });
     },
   });
 
+  // ✅ Logout
   const logoutMutation = useMutation({
     mutationFn: async () => {
       await apiRequest("POST", "/api/logout");
@@ -90,7 +90,7 @@ export function AuthProvider({ children }) {
         error,
         loginMutation,
         logoutMutation,
-        registerMutation,
+        createCoordinatorMutation, // 👈 only admins will see/use this
       }}
     >
       {children}

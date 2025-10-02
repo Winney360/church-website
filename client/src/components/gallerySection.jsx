@@ -64,10 +64,17 @@ export default function GallerySection() {
     : galleryItems.filter(item => item.category === activeTab);
 
   return (
-    <section className="py-16">
+    <section className="py-16 my-5 border border-green-500 dark:border-zinc-100 rounded-lg bg-orange-acccent text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100" >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Community Gallery</h2>
+           <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-green-500 dark:text">
+             <span 
+               className="inline-block animate-bounce" 
+               style={{ animationDuration: '1.2s', animationTimingFunction: 'ease' }}
+              >
+                Community Gallery
+             </span>
+           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Memories from our services, events, and fellowship activities that bring our community together.
           </p>
@@ -78,7 +85,12 @@ export default function GallerySection() {
           <Button
             variant={activeTab === "recent" ? "default" : "outline"}
             onClick={() => setActiveTab("recent")}
-            className="font-medium"
+            className={`
+                font-medium border-2 
+                ${activeTab === "recent" 
+                ? " text-zinc-100 dark:bg-zinc-800 bg-green-700 dark:text-zinc-100 "   
+                : "bg-green-600 text-zinc-100 border-amber-400 hover:bg-green-700 dark:bg-zinc-800 dark:border dark:hover:bg-zinc-900"} 
+               `}
             data-testid="tab-recent"
           >
             Recent Events
@@ -88,7 +100,12 @@ export default function GallerySection() {
               key={tab.id}
               variant={activeTab === tab.id ? "default" : "outline"}
               onClick={() => setActiveTab(tab.id)}
-              className="font-medium"
+               className={`
+                font-medium border-2 
+                ${activeTab === tab.id 
+                ? " text-zinc-100 dark:bg-zinc-800 bg-green-700 dark:text-zinc-100 "   
+                : "bg-green-600 text-zinc-100 border-amber-400 hover:bg-green-700 dark:bg-zinc-800 dark:border dark:hover:bg-zinc-900"} 
+               `}
               data-testid={`tab-${tab.id}`}
             >
               {tab.label}
@@ -113,20 +130,20 @@ export default function GallerySection() {
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 {item.isVideo ? (
-                  <Play className="text-white text-3xl" />
+                  <Play className="text-zinc-800 text-3xl" />
                 ) : (
-                  <Images className="text-white text-2xl" />
+                  <Images className="text-zinc-800 text-2xl" />
                 )}
               </div>
               
               {item.isVideo && (
-                <Badge className="absolute top-4 left-4 bg-red-600 text-white">
+                <Badge className="absolute top-4 left-4 bg-red-600 text-zinc-800">
                   VIDEO
                 </Badge>
               )}
               
               {index === 3 && (
-                <div className="absolute bottom-4 left-4 text-white">
+                <div className="absolute bottom-4 left-4 text-zinc-800">
                   <p className="font-medium">{item.title}</p>
                 </div>
               )}
@@ -134,14 +151,14 @@ export default function GallerySection() {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-8 text-amber-600 dark:text-emerald-200 bg-green-500/15 hover:bg-green-500/25">
           <Link href="/gallery">
             <Button 
               size="lg"
               data-testid="button-view-full-gallery"
             >
               <Images className="mr-2 h-5 w-5" />
-              View Full Gallery
+             <span>View Full Gallery</span> 
             </Button>
           </Link>
         </div>

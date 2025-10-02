@@ -192,21 +192,21 @@ export default function GalleryPage() {
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     {item.isVideo ? (
-                      <Play className="text-white text-3xl" />
+                      <Play className="text-zinc-800 text-3xl" />
                     ) : (
-                      <Images className="text-white text-2xl" />
+                      <Images className="text-zinc-800 text-2xl" />
                     )}
                   </div>
                   
                   {item.isVideo && (
-                    <Badge className="absolute top-2 left-2 bg-red-600 text-white">
+                    <Badge className="absolute top-2 left-2 bg-red-600 text-zinc-800">
                       VIDEO
                     </Badge>
                   )}
                   
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                    <p className="text-white font-medium text-sm">{item.title}</p>
-                    <p className="text-white/80 text-xs">
+                    <p className="text-zinc-800 font-medium text-sm">{item.title}</p>
+                    <p className="text-zinc-800/80 text-xs">
                       {new Date(item.date).toLocaleDateString()}
                     </p>
                   </div>
@@ -226,7 +226,7 @@ export default function GalleryPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-4 right-4 z-10 text-white hover:bg-white/20"
+                  className="absolute top-4 right-4 z-10 text-zinc-800 hover:bg-white/20"
                   onClick={closeLightbox}
                   data-testid="button-close-lightbox"
                 >
@@ -246,7 +246,7 @@ export default function GalleryPage() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-800 hover:bg-white/20"
                         onClick={() => navigateImage("prev")}
                         data-testid="button-prev-image"
                       >
@@ -256,7 +256,7 @@ export default function GalleryPage() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-800 hover:bg-white/20"
                         onClick={() => navigateImage("next")}
                         data-testid="button-next-image"
                       >
@@ -266,13 +266,13 @@ export default function GalleryPage() {
                   )}
                 </div>
                 
-                <div className="p-6 text-white">
+                <div className="p-6 text-zinc-800">
                   <h3 className="text-xl font-semibold mb-2" data-testid="lightbox-title">
                     {selectedImage.title}
                   </h3>
-                  <div className="flex items-center space-x-4 text-sm text-white/80">
+                  <div className="flex items-center space-x-4 text-sm text-zinc-800/80">
                     <span>{new Date(selectedImage.date).toLocaleDateString()}</span>
-                    <Badge variant="outline" className="text-white border-white/30">
+                    <Badge variant="outline" className="text-zinc-800 border-white/30">
                       {selectedImage.category}
                     </Badge>
                     <span>

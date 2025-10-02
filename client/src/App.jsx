@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Routes, Route } from "react-router-dom";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -17,22 +17,6 @@ import GalleryPage from "@/pages/galleryPage";
 import ContactPage from "@/pages/contactPage";
 import NotFound from "@/pages/notFound";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={HomePage} />
-      <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/admin" component={AdminDashboard} requiredRole="admin" />
-      <ProtectedRoute path="/events" component={EventsPage} />
-      <ProtectedRoute path="/sermons" component={SermonsPage} />
-      <ProtectedRoute path="/community" component={CommunityPage} />
-      <ProtectedRoute path="/gallery" component={GalleryPage} />
-      <ProtectedRoute path="/contact" component={ContactPage} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -40,7 +24,31 @@ function App() {
         <AuthProvider>
           <TooltipProvider>
             <Toaster />
-            <Router />
+            <Routes>
+              {/* Public pages */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/sermons" element={<SermonsPage />} />
+              <Route path="/community" element={<CommunityPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+
+              {/* Auth route */}
+              <Route path="/auth" element={<AuthPage />} />
+
+              {/* Admin-only route */}
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute requiredRole="admin">
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Catch-all */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </TooltipProvider>
         </AuthProvider>
       </ThemeProvider>

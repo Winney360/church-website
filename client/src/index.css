@@ -1,5 +1,10 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --color-dark-blue: #233d4d;
+  --color-orange-accent: #FE7F2D;
+}
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(240, 10%, 3.9%);

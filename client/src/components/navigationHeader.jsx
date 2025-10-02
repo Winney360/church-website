@@ -46,18 +46,18 @@ export default function NavigationHeader() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50  mb-3 border-b-4 border-border rounded-lg backdrop-blur-md text-zinc-800 dark:text-zinc-100 border-green-500 dark:border-zinc-100 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-8">
             {/* Church Logo and Name */}
-            <Link href="/" className="flex items-center space-x-3" data-testid="link-home-logo">
+            <Link href="/" className="flex items-center space-x-3 " data-testid="link-home-logo">
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <Church className="h-6 w-6 text-primary-foreground" />
               </div>
-              <div>
-                <h1 className="font-serif font-semibold text-lg">Grace Community</h1>
-                <p className="text-xs text-muted-foreground -mt-1">Church</p>
+              <div >
+                <h1 className="font-serif font-semibold text-lg text-amber-600">AIPCA St.Elias</h1>
+                <p className="text-xs text-muted-foreground -mt-1 text-amber-600">Kanthungu Church</p>
               </div>
             </Link>
 
@@ -67,9 +67,9 @@ export default function NavigationHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`transition-colors font-medium ${
+                  className={`transition-colors font-medium hover:text-amber-900 hover:underline dark:hover:text-zinc-50 ${
                     location === link.href
-                      ? "text-primary"
+                      ? "text-primary "
                       : "text-muted-foreground hover:text-primary"
                   }`}
                   data-testid={`nav-link-${link.label.toLowerCase()}`}
@@ -112,14 +112,14 @@ export default function NavigationHeader() {
                 <DropdownMenuTrigger asChild>
                   <Button 
                     variant="ghost" 
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-2 "
                     data-testid="button-user-menu"
                   >
-                    <User className="h-5 w-5" />
-                    <span className="hidden sm:inline">{user.username}</span>
+                    <User className="h-5 w-5 " />
+                    <span className="hidden sm:inline ">{user.username}</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent align="end" className="w-56 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 ">
                   <div className="px-2 py-1.5 text-sm font-medium">
                     {user.username}
                   </div>
@@ -141,7 +141,7 @@ export default function NavigationHeader() {
                     onClick={handleLogout}
                     data-testid="button-logout"
                   >
-                    <LogOut className="mr-2 h-4 w-4" />
+                    <LogOut className="mr-2 h-4 w-4 text-red-600" />
                     Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>

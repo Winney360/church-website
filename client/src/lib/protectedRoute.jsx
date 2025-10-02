@@ -1,40 +1,40 @@
+// lib/protectedRoute.jsx
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
-import { Redirect, Route } from "wouter";
+import { Navigate } from "react-router-dom";
 
-export function ProtectedRoute({ path, component: Component, requiredRole }) {
+export function ProtectedRoute({ children, requiredRole }) {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
     return (
-      <Route path={path}>
-        <div className="flex items-center justify-center min-h-screen">
-          <Loader2 className="h-8 w-8 animate-spin text-border" />
-        </div>
-      </Route>
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-border" />
+      </div>
     );
   }
 
-  if (!user) {
+  // If no user and a role is required → redirect to login
+  if (!user && requiredRole) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  // If role required but user doesn’t match (and is not admin) → access denied
+  if (requiredRole && user?.role !== requiredRole && user?.role !== "admin") {
     return (
-      <Route path={path}>
-        <Redirect to="/auth" />
-      </Route>
-    );
-  }
-
-  if (requiredRole && user.role !== requiredRole) {
-    return (
-      <Route path={path}>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-destructive mb-4">Access Denied</h1>
-            <p className="text-muted-foreground">You don't have permission to access this page.</p>
-          </div>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-destructive mb-4">
+            Access Denied
+          </h1>
+          <p className="text-muted-foreground">
+            You don't have permission to access this page.
+          </p>
         </div>
-      </Route>
+      </div>
     );
   }
 
-  return <Route path={path} component={Component} />;
+  // Otherwise → allow access
+  return children;
 }

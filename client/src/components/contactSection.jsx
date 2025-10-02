@@ -74,7 +74,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Address</h3>
-                  <p className="text-muted-foreground">123 Faith Avenue<br />Springfield, ST 12345</p>
+                  <p className="text-muted-foreground">500m from Kithirune Primary<br />Springfield, ST 12345</p>
                 </div>
               </div>
 

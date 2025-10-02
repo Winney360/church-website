@@ -22,8 +22,8 @@ export default function SermonSection() {
 
   if (isLoading) {
     return (
-      <section id="sermons" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="sermons" className="py-16 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="text-center mb-12">
             <div className="h-8 bg-muted rounded w-64 mx-auto mb-4 animate-pulse"></div>
             <div className="h-4 bg-muted rounded w-96 mx-auto animate-pulse"></div>
@@ -42,10 +42,17 @@ export default function SermonSection() {
   }
 
   return (
-    <section id="sermons" className="py-16">
+    <section id="sermons" className="py-16 border-2 rounded-lg text-zinc-800 dark:text-zinc-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Recent Sermons</h2>
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-green-500 dark:text">
+             <span 
+               className="inline-block animate-bounce" 
+               style={{ animationDuration: '1.2s', animationTimingFunction: 'ease' }}
+              >
+                Recent Sermons
+             </span>
+           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Listen to our latest messages and grow in your faith journey with teachings from God's Word.
           </p>

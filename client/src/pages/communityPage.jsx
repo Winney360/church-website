@@ -235,10 +235,10 @@ export default function CommunityPage() {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="gradient-hero rounded-2xl p-12">
-            <h2 className="text-3xl font-serif font-bold text-white mb-6">
+            <h2 className="text-3xl font-serif font-bold text-zinc-800 mb-6">
               Ready to Join a Community Group?
             </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-zinc-800/90 mb-8 max-w-2xl mx-auto">
               Take the next step in your faith journey. Connect with others who share your values 
               and grow together in a supportive community.
             </p>
@@ -254,7 +254,7 @@ export default function CommunityPage() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-primary"
+                className="border-white text-zinc-800 hover:bg-white hover:text-primary"
                 data-testid="button-contact-us"
               >
                 <Heart className="h-5 w-5 mr-2" />

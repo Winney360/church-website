@@ -3,7 +3,7 @@ import { Church } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-muted border-t border-border py-12">
+    <footer className="bg-muted border-t border-border py-12 text-zinc-800 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Church Info */}
@@ -13,7 +13,7 @@ export default function Footer() {
                 <Church className="h-6 w-6 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="font-serif font-semibold text-lg">Grace Community Church</h3>
+                <h3 className="font-serif font-semibold text-lg">AIPCA ST.ELIAS CHURCH</h3>
               </div>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
@@ -119,7 +119,7 @@ export default function Footer() {
 
         <div className="border-t border-border pt-8 text-center">
           <p className="text-muted-foreground">
-            © 2024 Grace Community Church. All rights reserved. | 
+            © 2025 AIPCA St.Elias Church. All rights reserved. | 
             <a href="#" className="hover:text-primary transition-colors ml-1" data-testid="footer-link-privacy">
               Privacy Policy
             </a> | 

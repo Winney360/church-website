@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Users, Calendar, Clock, CheckCircle, XCircle, Eye } from "lucide-react";
 import { useToast } from "@/hooks/useToast";
+import { ShieldCheck } from "lucide-react";
 
 export default function AdminDashboard() {
   const { user } = useAuth();
@@ -17,6 +18,27 @@ export default function AdminDashboard() {
   const { data: pendingUsers = [] } = useQuery({
     queryKey: ["/api/admin/pending-users"],
   });
+
+  const promoteUserMutation = useMutation({
+  mutationFn: async (userId) => {
+    const res = await apiRequest("PATCH", `/api/users/make-admin/${userId}`);
+    return res.json();
+  },
+  onSuccess: (data) => {
+    queryClient.invalidateQueries({ queryKey: ["/api/users"] });
+    toast({
+      title: "User promoted",
+      description: data.message,
+    });
+  },
+  onError: (err) => {
+    toast({
+      title: "Error",
+      description: err.message || "Failed to promote user",
+      variant: "destructive",
+    });
+  },
+});
 
   const { data: stats = {} } = useQuery({
     queryKey: ["/api/admin/stats"],
@@ -201,6 +223,49 @@ export default function AdminDashboard() {
                 )}
               </CardContent>
             </Card>
+            <Card>
+              <CardHeader>
+               <CardTitle>All Users</CardTitle>
+                </CardHeader>
+                 <CardContent>
+                   {allUsers.length === 0 ? (
+                    <p className="text-muted-foreground text-center py-8">
+                      No users found
+                    </p>
+                    ) : (
+                     <div className="space-y-4">
+                     {allUsers.map((u) => (
+                     <div
+                     key={u._id}
+                     className="flex items-center justify-between p-4 border rounded-lg"
+                     >
+                     <div>
+                      <p className="font-medium">{u.username}</p>
+                      <p className="text-sm text-muted-foreground">{u.email}</p>
+                    <Badge variant="outline" className="mt-1">
+                      {u.role}
+                    </Badge>
+                     </div>
+
+                      {u.role !== "admin" ? (
+                   <Button
+                     size="sm"
+                     onClick={() => promoteUserMutation.mutate(u._id)}
+                     disabled={promoteUserMutation.isPending}
+                     >
+                    <ShieldCheck className="h-4 w-4 mr-1" />
+                      Promote to Admin
+                    </Button>
+                       ) : (
+                       <span className="text-green-600 font-medium">✅ Admin</span>
+                      )}
+                    </div>
+                    ))}
+             </div>
+             )}
+            </CardContent>
+            </Card>
+
           </TabsContent>
 
           <TabsContent value="events" className="space-y-4">

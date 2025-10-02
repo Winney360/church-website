@@ -255,7 +255,7 @@ export default function EventsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
               <Card key={i} className="animate-pulse">
-                <div className="calendar-event p-4 text-center text-white">
+                <div className="calendar-event p-4 text-center text-zinc-800">
                   <div className="w-8 h-8 bg-white/20 rounded mx-auto mb-2"></div>
                   <div className="w-16 h-4 bg-white/20 rounded mx-auto"></div>
                 </div>
@@ -281,7 +281,7 @@ export default function EventsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEvents.map((event) => (
               <Card key={event.id} className="card-hover" data-testid={`event-card-${event.id}`}>
-                <div className="calendar-event p-4 text-center text-white">
+                <div className="calendar-event p-4 text-center text-zinc-800">
                   <div className="text-2xl font-bold">
                     {new Date(event.date).getDate()}
                   </div>

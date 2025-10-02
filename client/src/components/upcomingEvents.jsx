@@ -27,10 +27,18 @@ export default function UpcomingEvents() {
     .slice(0, 6);
 
   return (
-    <section id="events" className="py-16 bg-muted/30">
+    <section id="events" className="py-16 text-zinc-800 dark:text-zinc-100 border rounded-lg my-4 border-green-500 dark:border-zinc-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Upcoming Events</h2>
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-green-500 dark:text">
+             <span 
+               className="inline-block animate-bounce" 
+               style={{ animationDuration: '1.2s', animationTimingFunction: 'ease' }}
+              >
+                Upcoming Events
+             </span>
+           </h2>
+
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Stay connected with our community through worship services, special events, and fellowship opportunities.
           </p>
@@ -41,23 +49,28 @@ export default function UpcomingEvents() {
           {eventCategories.map((category) => (
             <Button
               key={category.id}
-              variant={activeCategory === category.id ? "default" : "outline"}
               onClick={() => setActiveCategory(category.id)}
-              className="font-medium"
-              data-testid={`filter-${category.id || 'all'}`}
-            >
-              {category.label}
-            </Button>
-          ))}
+               className={`
+                font-medium border-2 
+                ${activeCategory === category.id 
+                ? " text-zinc-100 dark:bg-zinc-800 bg-green-700 dark:text-zinc-100 "   
+                : "bg-green-600 text-zinc-100 border-amber-400 hover:bg-green-700 dark:bg-zinc-800 dark:border dark:hover:bg-zinc-900"} 
+               `}
+               data-testid={`filter-${category.id || 'all'}`}
+                >
+                {category.label}
+             </Button>
+
+             ))}
         </div>
 
         {/* Events Grid */}
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="animate-pulse">
-                <div className="calendar-event p-4 text-center text-white">
-                  <div className="w-8 h-8 bg-white/20 rounded mx-auto mb-2"></div>
+              <Card key={i} className="animate-pulse ">
+                <div className="calendar-event p-4 text-center text-zinc-800 ">
+                  <div className="w-8 h-8 bg-white/20 rounded mx-auto mb-2 "></div>
                   <div className="w-16 h-4 bg-white/20 rounded mx-auto"></div>
                 </div>
                 <CardContent className="p-6">
@@ -82,7 +95,7 @@ export default function UpcomingEvents() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {filteredEvents.map((event) => (
               <Card key={event.id} className="card-hover" data-testid={`event-card-${event.id}`}>
-                <div className="calendar-event p-4 text-center text-white">
+                <div className="calendar-event p-4 text-center text-zinc-800">
                   <div className="text-2xl font-bold">
                     {new Date(event.date).getDate()}
                   </div>
@@ -123,8 +136,8 @@ export default function UpcomingEvents() {
               size="lg"
               data-testid="button-view-all-events"
             >
-              <Calendar className="mr-2 h-5 w-5" />
-              View Full Calendar
+              <Calendar className="mr-2 h-5 w-5 " />
+              <span className="text-green-600">View Full Calendar</span>
             </Button>
           </Link>
         </div>

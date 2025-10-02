@@ -44,9 +44,20 @@ export default function AuthPage() {
   });
 
   // Redirect if already logged in (after hooks)
-  if (user) {
-    return <Redirect to="/" />;
+  // Redirect based on role
+if (user) {
+  if (user.role === "admin") {
+    return <Redirect to="/admin" />;
   }
+  // If you later add coordinator dashboard
+  if (user.role === "coordinator") {
+    return <Redirect to="/coordinator" />;
+  }
+
+  // Default: members or other roles go to homepage
+  return <Redirect to="/" />;
+}
+
 
   const onLogin = (data) => {
     loginMutation.mutate({
@@ -249,30 +260,30 @@ export default function AuthPage() {
 
       {/* Right side - Hero */}
       <div className="gradient-hero flex items-center justify-center p-8">
-        <div className="text-center text-white">
+        <div className="text-center text-zinc-800">
           <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-8">
-            <Church className="h-12 w-12 text-white" />
+            <Church className="h-12 w-12 text-zinc-800" />
           </div>
           <h1 className="font-serif text-4xl lg:text-5xl font-bold leading-tight mb-6">
             Welcome to Our
             <br />
             <span className="text-yellow-200">Community</span>
           </h1>
-          <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-lg">
+          <p className="text-xl text-zinc-800/90 mb-8 leading-relaxed max-w-lg">
             Join us in worship, fellowship, and service as we grow together in faith and love. 
             Everyone is welcome in God's house.
           </p>
           
           <div className="grid grid-cols-1 gap-4 max-w-sm mx-auto">
-            <div className="flex items-center space-x-3 text-white/90">
+            <div className="flex items-center space-x-3 text-zinc-800/90">
               <Heart className="h-5 w-5" />
               <span>Faith-centered community</span>
             </div>
-            <div className="flex items-center space-x-3 text-white/90">
+            <div className="flex items-center space-x-3 text-zinc-800/90">
               <Users className="h-5 w-5" />
               <span>All ages welcome</span>
             </div>
-            <div className="flex items-center space-x-3 text-white/90">
+            <div className="flex items-center space-x-3 text-zinc-800/90">
               <Church className="h-5 w-5" />
               <span>Weekly worship services</span>
             </div>
